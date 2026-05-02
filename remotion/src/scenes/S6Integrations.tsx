@@ -1,6 +1,7 @@
 import { AbsoluteFill, useCurrentFrame, useVideoConfig, spring } from "remotion";
 import { theme, fonts } from "../theme";
 import * as Brand from "../components/IconBrand";
+import { SceneChrome } from "../components/SceneChrome";
 
 const ITEMS = [
   { Mark: Brand.Slack, name: "Slack", note: "ROUTED → CTO" },
@@ -18,57 +19,65 @@ export const S6Integrations = () => {
   const { fps } = useVideoConfig();
 
   return (
-    <AbsoluteFill style={{ background: theme.bg, padding: "80px 140px" }}>
-      <div style={{ marginBottom: 36 }}>
-        <div style={{ fontFamily: fonts.mono, fontSize: 13, color: theme.violet, letterSpacing: "0.18em" }}>
-          GOVERNED EXECUTION · across your stack
+    <SceneChrome
+      act="ACT 04 / INTEGRATIONS"
+      title="Execution spans your existing stack"
+      subtitle="Real systems, one governed control surface"
+      progress={0.86}
+    >
+      <AbsoluteFill style={{ background: theme.bg, padding: "120px 140px 140px 140px" }}>
+        <div style={{ marginBottom: 36 }}>
+          <div style={{ fontFamily: fonts.mono, fontSize: 13, color: theme.violet, letterSpacing: "0.18em" }}>
+            GOVERNED EXECUTION · across your stack
+          </div>
+          <div style={{ fontFamily: fonts.display, fontSize: 44, fontWeight: 600, color: theme.text, letterSpacing: "-0.02em", marginTop: 8 }}>
+            One company. Every tool.
+          </div>
         </div>
-        <div style={{ fontFamily: fonts.display, fontSize: 44, fontWeight: 600, color: theme.text, letterSpacing: "-0.02em", marginTop: 8 }}>
-          One company. Every tool.
-        </div>
-      </div>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14 }}>
-        {ITEMS.map((it, i) => {
-          const inProg = spring({ frame: frame - i * 4, fps, config: { damping: 200 } });
-          const Mark = it.Mark;
-          return (
-            <div
-              key={it.name}
-              style={{
-                opacity: inProg,
-                transform: `translateY(${(1 - inProg) * 10}px)`,
-                display: "flex",
-                alignItems: "center",
-                gap: 14,
-                border: `1px solid ${theme.border}`,
-                background: theme.panel,
-                padding: "18px 20px",
-              }}
-            >
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14 }}>
+          {ITEMS.map((it, i) => {
+            const inProg = spring({ frame: frame - i * 4, fps, config: { damping: 200 } });
+            const Mark = it.Mark;
+            return (
               <div
+                key={it.name}
                 style={{
-                  width: 44,
-                  height: 44,
+                  opacity: inProg,
+                  transform: `translateY(${(1 - inProg) * 10}px)`,
                   display: "flex",
                   alignItems: "center",
-                  justifyContent: "center",
+                  gap: 14,
                   border: `1px solid ${theme.border}`,
+                  background: theme.panel,
+                  padding: "18px 20px",
                 }}
               >
-                <Mark size={22} color={theme.text} />
-              </div>
-              <div>
-                <div style={{ fontFamily: fonts.display, fontSize: 18, color: theme.text }}>
-                  {it.name}
+                <div
+                  style={{
+                    width: 44,
+                    height: 44,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    border: `1px solid ${theme.border}`,
+                    color: theme.text,
+                  }}
+                >
+                  <Mark size={22} color={theme.text} />
                 </div>
-                <div style={{ fontFamily: fonts.mono, fontSize: 10, color: theme.cyan, letterSpacing: "0.16em", marginTop: 2 }}>
-                  ● {it.note}
+                <div>
+                  <div style={{ fontFamily: fonts.display, fontSize: 18, color: theme.text }}>
+                    {it.name}
+                  </div>
+                  <div style={{ fontFamily: fonts.mono, fontSize: 10, color: theme.cyan, letterSpacing: "0.16em", marginTop: 2 }}>
+                    ● {it.note}
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
-    </AbsoluteFill>
+            );
+          })}
+        </div>
+      </AbsoluteFill>
+    </SceneChrome>
   );
 };

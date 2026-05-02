@@ -27,10 +27,10 @@ const cols = [
 
 export const Footer = () => {
   return (
-    <footer className="bg-rv pb-12 pt-24 hairline-t">
+    <footer className="bg-rv pb-12 pt-16 hairline-t sm:pt-20 lg:pt-24">
       <div className="mx-auto max-w-[1400px] px-6">
-        <div className="grid grid-cols-2 gap-y-12 lg:grid-cols-5 lg:gap-x-8">
-          <div className="col-span-2 lg:col-span-1">
+        <div className="grid grid-cols-1 gap-y-12 sm:grid-cols-2 lg:grid-cols-5 lg:gap-x-8">
+          <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-2 font-display text-[20px] font-semibold tracking-tight text-rv-text">
               <span className="inline-block h-3 w-3 rotate-45 bg-rv-violet" />
               Rivtor
@@ -40,7 +40,7 @@ export const Footer = () => {
             </p>
           </div>
           {cols.map((c) => (
-            <div key={c.title}>
+            <div key={c.title} className="sm:max-w-[260px]">
               <div className="label-eyebrow mb-5 text-rv-dim">{c.title}</div>
               <ul className="space-y-3">
                 {c.items.map((it: any) => {
@@ -62,7 +62,7 @@ export const Footer = () => {
           ))}
         </div>
 
-        <div className="mt-20 flex items-center justify-between hairline-t pt-6">
+        <div className="mt-14 flex flex-col items-start gap-4 hairline-t pt-6 sm:mt-20 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-5 text-rv-dim">
             <a aria-label="X" className="cursor-pointer hover:text-rv-text"><svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2H21.5l-7.5 8.59L22.94 22h-6.86l-5.37-7.02L4.56 22H1.3l8.05-9.21L1.06 2h7.04l4.85 6.42L18.244 2zM17.07 20.04h1.92L7.02 3.86H4.96L17.07 20.04z"/></svg></a>
             <a aria-label="LinkedIn" className="cursor-pointer hover:text-rv-text"><Linkedin className="h-4 w-4" /></a>

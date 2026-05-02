@@ -27,17 +27,17 @@ export const ProductVideo = () => {
   return (
     <section
       ref={wrapRef}
-      className="relative bg-rv py-32"
+      className="relative bg-rv py-20 sm:py-24 lg:py-32"
       aria-label="Rivtor decision and execution loop"
     >
       <div className="mx-auto max-w-[1400px] px-6">
-        <div className="mb-10 flex items-end justify-between gap-8">
+        <div className="mb-8 flex items-end justify-between gap-8 sm:mb-10">
           <div>
             <div className="label-eyebrow mb-4 inline-flex items-center gap-2 text-rv-dim">
               <span className="h-1.5 w-1.5 bg-rv-violet" />
               THE LOOP
             </div>
-            <h2 className="font-display max-w-[820px] text-[clamp(1.75rem,3.6vw,3rem)] font-semibold leading-[1.05] text-rv-text">
+            <h2 className="font-display max-w-[820px] text-[clamp(1.5rem,6vw,3rem)] font-semibold leading-[1.06] text-rv-text">
               Directive in. Shipped outcome out.
             </h2>
           </div>
@@ -71,7 +71,7 @@ export const ProductVideo = () => {
           />
         </div>
 
-        <div className="mt-px grid grid-cols-2 gap-px bg-white/[0.06] hairline lg:grid-cols-4">
+        <div className="mt-px grid grid-cols-1 gap-px bg-white/[0.06] hairline sm:grid-cols-2 lg:grid-cols-4">
           {[
             ["DIRECTIVE", "natural-language brief"],
             ["DECISION", "diverged · simulated · committed"],

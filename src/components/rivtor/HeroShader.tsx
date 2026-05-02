@@ -148,12 +148,30 @@ function ShaderPlane() {
 
 export const HeroShader = () => {
   const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-  if (!mounted) return <div className="absolute inset-0 bg-rv" />;
+  const [lowPower, setLowPower] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const mm = window.matchMedia("(max-width: 767px)");
+    const onChange = () => setLowPower(mm.matches);
+    onChange();
+    mm.addEventListener("change", onChange);
+    return () => mm.removeEventListener("change", onChange);
+  }, []);
+
+  if (!mounted || lowPower) {
+    return (
+      <div className="absolute inset-0 bg-rv">
+        <div className="absolute inset-0 bg-[radial-gradient(700px_360px_at_50%_45%,rgba(124,92,255,0.2),transparent_68%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(500px_260px_at_75%_30%,rgba(0,212,255,0.12),transparent_70%)]" />
+      </div>
+    );
+  }
+
   return (
     <div className="absolute inset-0 overflow-hidden">
       <Canvas
-        dpr={[1, 1.5]}
+        dpr={[1, 1.25]}
         gl={{ antialias: false, alpha: false, powerPreference: "high-performance" }}
         camera={{ position: [0, 0, 1] }}
       >

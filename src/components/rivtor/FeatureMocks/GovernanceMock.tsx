@@ -1,8 +1,8 @@
 export const GovernanceMock = () => (
   <div className="relative h-full w-full overflow-hidden">
     <div className="absolute inset-0 bg-[radial-gradient(600px_400px_at_50%_30%,rgba(124,92,255,0.16),transparent_60%)]" />
-    <div className="relative flex h-full items-center justify-center p-10">
-      <div className="hairline w-[480px] bg-black/75 p-5 backdrop-blur">
+    <div className="relative flex h-full items-center justify-center p-5 sm:p-8 lg:p-10">
+      <div className="hairline w-full max-w-[480px] bg-black/75 p-4 backdrop-blur sm:p-5">
         <div className="mb-4 flex items-center justify-between">
           <div className="label-eyebrow text-rv-dim">POLICY_GATE</div>
           <span className="label-eyebrow border border-rv-violet/40 px-2 py-0.5 text-[9px] text-rv-violet">

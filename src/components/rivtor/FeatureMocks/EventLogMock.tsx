@@ -10,8 +10,8 @@ const events = [
 export const EventLogMock = () => (
   <div className="relative h-full w-full overflow-hidden">
     <div className="absolute inset-0 bg-[radial-gradient(700px_500px_at_50%_50%,rgba(0,212,255,0.10),transparent_60%)]" />
-    <div className="relative flex h-full items-center justify-center p-10">
-      <div className="hairline w-[560px] bg-black/80 p-5 backdrop-blur">
+    <div className="relative flex h-full items-center justify-center p-5 sm:p-8 lg:p-10">
+      <div className="hairline w-full max-w-[560px] overflow-x-auto bg-black/80 p-4 backdrop-blur sm:p-5">
         <div className="mb-3 flex items-center justify-between">
           <div className="label-eyebrow text-rv-dim">EVENT_LOG · project_acme</div>
           <span className="font-mono text-[10px] text-rv-cyan">● APPENDING</span>

@@ -1,8 +1,8 @@
 export const DecisionMock = () => (
   <div className="relative h-full w-full overflow-hidden">
     <div className="absolute inset-0 bg-[radial-gradient(700px_400px_at_30%_30%,rgba(124,92,255,0.18),transparent_60%)]" />
-    <div className="relative flex h-full items-center justify-center p-10">
-      <div className="w-[540px] space-y-3">
+    <div className="relative flex h-full items-center justify-center p-5 sm:p-8 lg:p-10">
+      <div className="w-full max-w-[540px] space-y-3">
         <div className="hairline bg-black/70 p-4 backdrop-blur">
           <div className="label-eyebrow mb-3 flex items-center justify-between text-rv-dim">
             <span>DIVERGENCE</span>

@@ -20,19 +20,19 @@ const chainEntries = [
 
 export const LightSection = () => {
   return (
-    <section id="light-section" className="relative bg-white py-32 text-[#050507]">
+    <section id="light-section" className="relative bg-white py-20 text-[#050507] sm:py-24 lg:py-32">
       <div className="mx-auto max-w-[1400px] px-6">
         <div className="label-eyebrow mb-6 inline-flex items-center gap-2 text-[#050507]">
           <span className="h-2 w-2 bg-[#5B3DF5]" />
           FROM ONE-LINE BRIEF TO SHIPPED COMPANY
         </div>
-        <h2 className="font-display mb-20 max-w-[920px] text-[clamp(2rem,4.5vw,3.75rem)] font-semibold leading-[1.05] tracking-[-0.02em]">
+        <h2 className="font-display mb-12 max-w-[920px] text-[clamp(1.55rem,7vw,3.75rem)] font-semibold leading-[1.06] tracking-[-0.02em] sm:mb-16 lg:mb-20">
           Tell Rivtor what to ship.
-          <br />
+          <br className="hidden sm:block" />
           It runs the rest.
         </h2>
 
-        <div className="grid grid-cols-1 gap-10 border-y border-black/10 py-16 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.25fr)_minmax(0,1.05fr)]">
+        <div className="grid grid-cols-1 gap-10 border-y border-black/10 py-10 sm:py-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.25fr)_minmax(0,1.05fr)] lg:py-16">
           {/* Left — copy */}
           <div>
             <div className="mb-6 flex items-center gap-2">
@@ -78,7 +78,7 @@ export const LightSection = () => {
                 return (
                   <div
                     key={d.task}
-                    className={`grid grid-cols-[36px_1fr_auto] items-center gap-4 px-4 py-4 ${
+                    className={`grid grid-cols-[36px_1fr] items-center gap-4 px-3 py-3 sm:grid-cols-[36px_1fr_auto] sm:px-4 sm:py-4 ${
                       i < directives.length - 1 ? "border-b border-black/10" : ""
                     }`}
                   >
@@ -90,8 +90,11 @@ export const LightSection = () => {
                         {d.name}
                       </div>
                       <div className="truncate text-[13px] text-[#050507]">{d.task}</div>
+                      <span className={`label-eyebrow mt-1 inline-block text-[10px] sm:hidden ${toneClass(d.tone)}`}>
+                        {d.status}
+                      </span>
                     </div>
-                    <span className={`label-eyebrow text-[10px] ${toneClass(d.tone)}`}>
+                    <span className={`label-eyebrow hidden text-[10px] sm:inline ${toneClass(d.tone)}`}>
                       {d.status}
                     </span>
                   </div>
@@ -100,12 +103,12 @@ export const LightSection = () => {
             </div>
             <div className="mt-3 flex items-center justify-between font-mono text-[11px] text-black/45">
               <span>● appending events</span>
-              <span>seq #236 · throughput 184/min</span>
+              <span className="hidden sm:inline">seq #236 · throughput 184/min</span>
             </div>
           </div>
 
           {/* Right — terminal */}
-          <div className="hairline overflow-hidden bg-[#050507]">
+          <div className="hairline hidden overflow-hidden bg-[#050507] lg:block">
             <div className="flex items-center gap-2 border-b border-white/10 bg-[#0B0F1A] px-3 py-2">
               <div className="flex gap-1.5">
                 <div className="h-2.5 w-2.5 rounded-full bg-red-500/80" />

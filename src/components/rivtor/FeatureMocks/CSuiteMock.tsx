@@ -17,7 +17,7 @@ const bus = [
 export const CSuiteMock = () => (
   <div className="relative h-full w-full overflow-hidden">
     <div className="absolute inset-0 bg-[radial-gradient(600px_400px_at_70%_50%,rgba(0,212,255,0.10),transparent_60%)]" />
-    <div className="relative grid h-full grid-cols-[1.1fr_1fr] gap-3 p-10">
+    <div className="relative grid h-full grid-cols-1 gap-3 p-5 sm:p-8 lg:grid-cols-[1.1fr_1fr] lg:p-10">
       <div className="hairline bg-black/70 p-4 backdrop-blur">
         <div className="label-eyebrow mb-3 text-rv-dim">C-SUITE</div>
         <div className="space-y-2">

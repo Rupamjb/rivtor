@@ -59,13 +59,13 @@ export const FeatureTabs = () => {
   const Mock = tab.Mock;
 
   return (
-    <section className="relative bg-rv py-32">
+    <section className="relative bg-rv py-20 sm:py-24 lg:py-32">
       <div className="mx-auto max-w-[1400px] px-6">
         <div className="label-eyebrow mb-6 inline-flex items-center gap-2 text-rv-text">
           <span className="h-2 w-2 bg-rv-violet" />
           WHY RIVTOR
         </div>
-        <h2 className="font-display mb-24 max-w-[1000px] text-[clamp(2rem,4.5vw,3.75rem)] font-medium leading-[1.05] tracking-[-0.03em] text-rv-text">
+        <h2 className="font-display mb-12 max-w-[1000px] text-[clamp(1.6rem,7vw,3.75rem)] font-medium leading-[1.06] tracking-[-0.03em] text-rv-text sm:mb-16 lg:mb-24">
           You hired an autonomous company.
           <br />
           Give it an operating system.
@@ -78,7 +78,7 @@ export const FeatureTabs = () => {
                 key={t.key}
                 onClick={() => setActive(i)}
                 className={cn(
-                  "flex items-center gap-4 border-l-2 px-6 py-6 text-left transition-colors",
+                  "flex items-center gap-4 border-l-2 px-4 py-4 text-left transition-colors sm:px-6 sm:py-6",
                   active === i
                     ? "border-rv-violet bg-rv-violet/5"
                     : "border-transparent hover:bg-white/[0.02]"
@@ -102,7 +102,7 @@ export const FeatureTabs = () => {
             ))}
           </div>
 
-          <div className="relative min-h-[520px] overflow-hidden bg-black">
+          <div className="relative hidden min-h-[460px] overflow-hidden bg-black md:block lg:min-h-[520px]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={tab.key}
@@ -117,7 +117,7 @@ export const FeatureTabs = () => {
             </AnimatePresence>
           </div>
 
-          <div className="bg-rv p-8 lg:p-10">
+          <div className="bg-rv p-6 sm:p-8 lg:p-10">
             <div className="label-eyebrow mb-6 text-rv-dim">{tab.n}</div>
             <AnimatePresence mode="wait">
               <motion.div
@@ -127,15 +127,15 @@ export const FeatureTabs = () => {
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.3 }}
               >
-                <h3 className="font-display mb-4 text-[28px] font-semibold leading-[1.15] text-rv-text">
+                <h3 className="font-display mb-4 text-[24px] font-semibold leading-[1.15] text-rv-text sm:text-[28px]">
                   {tab.title}
                 </h3>
-                <p className="mb-8 text-[14px] leading-relaxed text-rv-dim">
+                <p className="mb-6 text-[14px] leading-relaxed text-rv-dim sm:mb-8">
                   {tab.body}
                 </p>
                 <ul className="space-y-4">
-                  {tab.bullets.map((b) => (
-                    <li key={b} className="flex gap-3 text-[13px] text-rv-text/85">
+                  {tab.bullets.map((b, idx) => (
+                    <li key={b} className={cn("flex gap-3 text-[13px] text-rv-text/85", idx > 1 && "hidden sm:flex")}>
                       <span className="mt-[7px] h-px w-3 shrink-0 bg-rv-violet" />
                       <span>{b}</span>
                     </li>

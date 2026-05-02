@@ -1,7 +1,9 @@
-import { AbsoluteFill, Series } from "remotion";
+import { AbsoluteFill } from "remotion";
 import { loadFont as loadInterTight } from "@remotion/google-fonts/InterTight";
 import { loadFont as loadInter } from "@remotion/google-fonts/Inter";
 import { loadFont as loadJetBrains } from "@remotion/google-fonts/JetBrainsMono";
+import { TransitionSeries, linearTiming } from "@remotion/transitions";
+import { fade } from "@remotion/transitions/fade";
 import { theme, fonts } from "./theme";
 import { Backdrop } from "./scenes/Backdrop";
 import { S1Directive } from "./scenes/S1Directive";
@@ -20,29 +22,53 @@ export const MainVideo = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: theme.bg, fontFamily: fonts.body }}>
       <Backdrop />
-      <Series>
-        <Series.Sequence durationInFrames={90}>
+      <TransitionSeries>
+        <TransitionSeries.Sequence durationInFrames={90}>
           <S1Directive />
-        </Series.Sequence>
-        <Series.Sequence durationInFrames={90}>
+        </TransitionSeries.Sequence>
+        <TransitionSeries.Transition
+          presentation={fade({ shouldFadeOutExitingScene: true })}
+          timing={linearTiming({ durationInFrames: 18 })}
+        />
+        <TransitionSeries.Sequence durationInFrames={90}>
           <S2Routing />
-        </Series.Sequence>
-        <Series.Sequence durationInFrames={100}>
+        </TransitionSeries.Sequence>
+        <TransitionSeries.Transition
+          presentation={fade({ shouldFadeOutExitingScene: true })}
+          timing={linearTiming({ durationInFrames: 18 })}
+        />
+        <TransitionSeries.Sequence durationInFrames={100}>
           <S3Taste />
-        </Series.Sequence>
-        <Series.Sequence durationInFrames={80}>
+        </TransitionSeries.Sequence>
+        <TransitionSeries.Transition
+          presentation={fade({ shouldFadeOutExitingScene: true })}
+          timing={linearTiming({ durationInFrames: 18 })}
+        />
+        <TransitionSeries.Sequence durationInFrames={85}>
           <S4Governance />
-        </Series.Sequence>
-        <Series.Sequence durationInFrames={110}>
+        </TransitionSeries.Sequence>
+        <TransitionSeries.Transition
+          presentation={fade({ shouldFadeOutExitingScene: true })}
+          timing={linearTiming({ durationInFrames: 18 })}
+        />
+        <TransitionSeries.Sequence durationInFrames={110}>
           <S5DAG />
-        </Series.Sequence>
-        <Series.Sequence durationInFrames={70}>
+        </TransitionSeries.Sequence>
+        <TransitionSeries.Transition
+          presentation={fade({ shouldFadeOutExitingScene: true })}
+          timing={linearTiming({ durationInFrames: 18 })}
+        />
+        <TransitionSeries.Sequence durationInFrames={80}>
           <S6Integrations />
-        </Series.Sequence>
-        <Series.Sequence durationInFrames={90}>
+        </TransitionSeries.Sequence>
+        <TransitionSeries.Transition
+          presentation={fade({ shouldFadeOutExitingScene: true })}
+          timing={linearTiming({ durationInFrames: 18 })}
+        />
+        <TransitionSeries.Sequence durationInFrames={95}>
           <S7Outcome />
-        </Series.Sequence>
-      </Series>
+        </TransitionSeries.Sequence>
+      </TransitionSeries>
     </AbsoluteFill>
   );
 };
