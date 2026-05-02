@@ -17,9 +17,29 @@ type MarkProps = {
   className?: string;
   size?: number;
   monochrome?: boolean;
+  surface?: "light" | "dark";
 };
 
-const Icon24 = ({ icon, size = 24, className, monochrome = true }: MarkProps & { icon: SimpleIcon }) => (
+const darkSurfaceOverrides = {
+  Github: "#F5F7FA",
+  Notion: "#F5F7FA",
+  Vercel: "#F5F7FA",
+  Resend: "#F5F7FA",
+  Cursor: "#F5F7FA",
+} as const;
+
+const Icon24 = ({
+  icon,
+  size = 24,
+  className,
+  monochrome = true,
+  surface = "light",
+  brand,
+}: MarkProps & { icon: SimpleIcon; brand?: keyof typeof darkSurfaceOverrides }) => {
+  const override = !monochrome && surface === "dark" && brand ? darkSurfaceOverrides[brand] : undefined;
+  const fill = monochrome ? "currentColor" : override ?? `#${icon.hex}`;
+
+  return (
   <svg
     width={size}
     height={size}
@@ -28,9 +48,10 @@ const Icon24 = ({ icon, size = 24, className, monochrome = true }: MarkProps & {
     fill="none"
     aria-hidden="true"
   >
-    <path d={icon.path} fill={monochrome ? "currentColor" : `#${icon.hex}`} />
+    <path d={icon.path} fill={fill} />
   </svg>
-);
+  );
+};
 
 const slackPaths = [
   "M27.2 80c0 7.3-5.9 13.2-13.2 13.2C6.7 93.2.8 87.3.8 80c0-7.3 5.9-13.2 13.2-13.2h13.2V80zm6.6 0c0-7.3 5.9-13.2 13.2-13.2 7.3 0 13.2 5.9 13.2 13.2v33c0 7.3-5.9 13.2-13.2 13.2-7.3 0-13.2-5.9-13.2-13.2V80z",
@@ -57,16 +78,16 @@ export const Slack = ({ size = 24, className, monochrome = true }: MarkProps) =>
 );
 
 export const Linear = (p: MarkProps) => <Icon24 {...p} icon={siLinear} />;
-export const Github = (p: MarkProps) => <Icon24 {...p} icon={siGithub} />;
-export const Notion = (p: MarkProps) => <Icon24 {...p} icon={siNotion} />;
+export const Github = (p: MarkProps) => <Icon24 {...p} icon={siGithub} brand="Github" />;
+export const Notion = (p: MarkProps) => <Icon24 {...p} icon={siNotion} brand="Notion" />;
 export const Stripe = (p: MarkProps) => <Icon24 {...p} icon={siStripe} />;
-export const Vercel = (p: MarkProps) => <Icon24 {...p} icon={siVercel} />;
+export const Vercel = (p: MarkProps) => <Icon24 {...p} icon={siVercel} brand="Vercel" />;
 export const Postgres = (p: MarkProps) => <Icon24 {...p} icon={siPostgresql} />;
-export const Resend = (p: MarkProps) => <Icon24 {...p} icon={siResend} />;
+export const Resend = (p: MarkProps) => <Icon24 {...p} icon={siResend} brand="Resend" />;
 export const Sentry = (p: MarkProps) => <Icon24 {...p} icon={siSentry} />;
 export const Hubspot = (p: MarkProps) => <Icon24 {...p} icon={siHubspot} />;
 export const Gmail = (p: MarkProps) => <Icon24 {...p} icon={siGmail} />;
-export const Cursor = (p: MarkProps) => <Icon24 {...p} icon={siCursor} />;
+export const Cursor = (p: MarkProps) => <Icon24 {...p} icon={siCursor} brand="Cursor" />;
 
 export const ALL_MARKS = [
   { Mark: Slack, name: "Slack" },

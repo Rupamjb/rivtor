@@ -13,7 +13,7 @@ export const LogoStrip = () => {
       <div className="flex w-max animate-marquee items-center gap-10 px-6 text-rv-text/75 sm:gap-14 sm:px-8">
         {items.map(({ Mark, name }, i) => (
           <div key={i} className="flex items-center gap-3 opacity-80 transition-opacity hover:opacity-100">
-            <Mark size={22} monochrome={false} />
+            <Mark size={22} monochrome={false} surface="dark" />
             <span className="font-display hidden text-[18px] font-medium tracking-tight sm:inline">{name}</span>
           </div>
         ))}
