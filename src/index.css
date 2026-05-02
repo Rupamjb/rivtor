@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 20% 3%;
+    --foreground: 210 20% 97%;
+
+    --card: 222 32% 7%;
+    --card-foreground: 210 20% 97%;
+
+    --popover: 222 32% 7%;
+    --popover-foreground: 210 20% 97%;
+
+    --primary: 252 100% 68%;
+    --primary-foreground: 210 20% 97%;
+
+    --secondary: 222 32% 11%;
+    --secondary-foreground: 210 20% 97%;
+
+    --muted: 222 20% 14%;
+    --muted-foreground: 220 9% 65%;
+
+    --accent: 192 100% 50%;
+    --accent-foreground: 240 20% 3%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 20% 97%;
+
+    --border: 0 0% 100%;
+    --input: 222 20% 14%;
+    --ring: 252 100% 68%;
+
+    --radius: 0.25rem;
+
+    /* Rivtor specific */
+    --rv-bg: 240 20% 3%;
+    --rv-bg-2: 222 32% 7%;
+    --rv-violet: 252 100% 68%;
+    --rv-cyan: 192 100% 50%;
+    --rv-text: 210 20% 97%;
+    --rv-text-dim: 220 9% 65%;
+    --rv-hairline: 0 0% 100%;
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border) / 0.08);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: hsl(var(--rv-bg));
+    color: hsl(var(--rv-text));
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: 'ss01', 'cv11';
+  }
+
+  .font-display {
+    font-family: 'Inter Tight', 'Inter', sans-serif;
+    letter-spacing: -0.03em;
+  }
+
+  .font-mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  .label-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  .hairline {
+    border: 1px solid hsl(var(--rv-hairline) / 0.08);
+  }
+  .hairline-b {
+    border-bottom: 1px solid hsl(var(--rv-hairline) / 0.08);
+  }
+  .hairline-t {
+    border-top: 1px solid hsl(var(--rv-hairline) / 0.08);
+  }
+  .hairline-r {
+    border-right: 1px solid hsl(var(--rv-hairline) / 0.08);
+  }
+
+  .text-rv-dim {
+    color: hsl(var(--rv-text-dim));
+  }
+
+  .bg-rv {
+    background-color: hsl(var(--rv-bg));
+  }
+  .bg-rv-2 {
+    background-color: hsl(var(--rv-bg-2));
+  }
+
+  /* Marquee */
+  @keyframes marquee {
+    from { transform: translate3d(0,0,0); }
+    to { transform: translate3d(-50%,0,0); }
+  }
+  .animate-marquee {
+    animation: marquee 60s linear infinite;
+  }
+
+  @keyframes pulse-ring {
+    0%, 100% { transform: scale(1); opacity: 0.4; }
+    50% { transform: scale(1.08); opacity: 0.7; }
+  }
+  .animate-pulse-ring {
+    animation: pulse-ring 4s ease-in-out infinite;
+  }
+
+  @keyframes slow-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .animate-slow-spin {
+    animation: slow-spin 30s linear infinite;
+  }
+
+  /* Grid bg */
+  .bg-grid {
+    background-image:
+      linear-gradient(hsl(var(--rv-hairline) / 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--rv-hairline) / 0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .scanlines::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,0.02) 0px,
+      rgba(255,255,255,0.02) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    pointer-events: none;
+  }
+
+  ::selection {
+    background-color: hsl(var(--rv-violet) / 0.4);
+    color: hsl(var(--rv-text));
+  }
+}
