@@ -18,6 +18,15 @@ def test_protected_endpoint_requires_bearer_token() -> None:
     assert response.json()["detail"] == "Missing bearer token"
 
 
+def test_protected_endpoint_401_includes_cors_headers_when_origin_present() -> None:
+    response = client.get(
+        "/activities/feed",
+        headers={"Origin": "https://rivtor-five.vercel.app"},
+    )
+    assert response.status_code == 401
+    assert response.headers.get("access-control-allow-origin") in {"*", "https://rivtor-five.vercel.app"}
+
+
 def test_linkedin_endpoint_requires_bearer_token() -> None:
     response = client.post("/linkedin/connect", json={"step": "start"})
     assert response.status_code == 401
