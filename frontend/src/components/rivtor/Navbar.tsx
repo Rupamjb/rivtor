@@ -1,15 +1,20 @@
+"use client";
+
 import { useEffect, useState, type ReactNode } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useNavState } from "@/lib/useScrollState";
 import { ChevronDown, Menu, X } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/context/AuthContext";
+import { getStartedDestination } from "@/lib/auth-routing";
 
 const navLinks = [
-  { label: "PRODUCTS", to: "/products", hasArrow: true },
-  { label: "SOLUTIONS", to: "/solutions", hasArrow: true },
-  { label: "TOOLKITS", to: "/toolkits" },
-  { label: "BLOG", to: "/blog" },
-  { label: "DOCS", to: "/docs" },
+  { label: "PRODUCTS", href: "/products", hasArrow: true },
+  { label: "SOLUTIONS", href: "/solutions", hasArrow: true },
+  { label: "TOOLKITS", href: "/toolkits" },
+  { label: "BLOG", href: "/blog" },
+  { label: "DOCS", href: "/docs" },
 ];
 
 const RivtorMark = ({ light = false }: { light?: boolean }) => (
@@ -40,19 +45,19 @@ const RivtorMark = ({ light = false }: { light?: boolean }) => (
 
 const NavItem = ({
   children,
-  to,
+  href,
   hasArrow,
   light,
   active,
 }: {
   children: ReactNode;
-  to: string;
+  href: string;
   hasArrow?: boolean;
   light?: boolean;
   active?: boolean;
 }) => (
   <Link
-    to={to}
+    href={href}
     className={cn(
       "label-eyebrow flex items-center gap-1 transition-opacity hover:opacity-100",
       light ? "text-[#050507] opacity-80" : "text-rv-text opacity-70",
@@ -66,9 +71,11 @@ const NavItem = ({
 
 export const Navbar = () => {
   const state = useNavState();
-  const { pathname } = useLocation();
+  const pathname = usePathname();
+  const { user } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
   const light = state === "light";
+  const getStartedHref = getStartedDestination(Boolean(user));
 
   useEffect(() => {
     setMobileOpen(false);
@@ -90,23 +97,23 @@ export const Navbar = () => {
       )}
     >
       <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-6">
-        <Link to="/" aria-label="Rivtor home">
+        <Link href="/" aria-label="Rivtor home">
           <RivtorMark light={mobileOpen ? false : light} />
         </Link>
         <div className="hidden items-center gap-8 lg:flex">
           {navLinks.map((link) => (
             <NavItem
-              key={link.to}
-              to={link.to}
+              key={link.href}
+              href={link.href}
               hasArrow={link.hasArrow}
               light={light}
-              active={pathname === link.to}
+              active={pathname === link.href}
             >
               {link.label}
             </NavItem>
           ))}
           <Link
-            to="/get-started"
+            href={getStartedHref}
             className={cn(
               "label-eyebrow px-4 py-2 transition-colors",
               light ? "bg-[#050507] text-white" : "bg-white text-[#050507]"
@@ -133,11 +140,11 @@ export const Navbar = () => {
           <div className="flex flex-col gap-1">
             {navLinks.map((link) => (
               <Link
-                key={link.to}
-                to={link.to}
+                key={link.href}
+                href={link.href}
                 className={cn(
                   "label-eyebrow py-3 text-rv-text/85",
-                  pathname === link.to && "text-rv-text"
+                  pathname === link.href && "text-rv-text"
                 )}
               >
                 {link.label}
@@ -145,7 +152,7 @@ export const Navbar = () => {
             ))}
           </div>
           <Link
-            to="/get-started"
+            href={getStartedHref}
             className="label-eyebrow mt-3 inline-flex bg-white px-4 py-2 text-[#050507]"
           >
             GET STARTED

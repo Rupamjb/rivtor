@@ -1,0 +1,35 @@
+:root {
+  --fo-bg: 222 24% 6%;
+  --fo-bg-elev: 226 24% 10%;
+  --fo-bg-soft: 222 20% 14%;
+  --fo-border: 0 0% 100%;
+  --fo-text: 220 14% 93%;
+  --fo-text-dim: 219 10% 62%;
+  --fo-emerald: 161 82% 58%;
+  --fo-cyan: 191 88% 60%;
+}
+
+.founderos-shell {
+  background:
+    radial-gradient(circle at 12% 0%, rgba(66, 76, 104, 0.22) 0%, rgba(13, 16, 23, 0) 36%),
+    radial-gradient(circle at 90% 8%, rgba(51, 63, 88, 0.22) 0%, rgba(12, 15, 22, 0) 42%),
+    linear-gradient(180deg, #0a0d12 0%, #090b10 100%);
+}
+
+.founderos-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+}
+
+.founderos-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.founderos-scroll::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.founderos-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}

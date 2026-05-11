@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useRef, useState } from "react";
 
 export const ProductVideo = () => {
@@ -7,7 +9,15 @@ export const ProductVideo = () => {
 
   useEffect(() => {
     const el = wrapRef.current;
+    const video = ref.current;
     if (!el) return;
+
+    if (typeof IntersectionObserver === "undefined") {
+      setVisible(true);
+      video?.play().catch(() => {});
+      return;
+    }
+
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
@@ -18,7 +28,7 @@ export const ProductVideo = () => {
           else v.pause();
         }
       },
-      { threshold: 0.25 }
+      { threshold: 0.15 }
     );
     io.observe(el);
     return () => io.disconnect();
@@ -55,10 +65,16 @@ export const ProductVideo = () => {
             ref={ref}
             className="absolute inset-0 h-full w-full object-cover"
             src="/rivtor-demo.mp4"
+            autoPlay
             muted
             playsInline
             loop
             preload="metadata"
+            onLoadedData={() => {
+              if (visible) {
+                ref.current?.play().catch(() => {});
+              }
+            }}
           />
           <div
             className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ${

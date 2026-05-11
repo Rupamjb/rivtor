@@ -15,12 +15,17 @@ PROTECTED_PREFIXES: Iterable[str] = (
     "/agents",
     "/chat",
     "/approvals",
+    "/linkedin",
+    "/voice",
 )
 
 
 class AuthGuardMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
         path = request.url.path
+
+        if request.method == "OPTIONS":
+            return await call_next(request)
 
         if path in PUBLIC_PATHS or path.startswith("/auth"):
             return await call_next(request)

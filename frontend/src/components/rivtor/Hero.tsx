@@ -1,5 +1,12 @@
+"use client";
+
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import { HeroShader } from "./HeroShader";
+
+const HeroShader = dynamic(
+  () => import("./HeroShader").then((module) => module.HeroShader),
+  { ssr: false },
+);
 
 export const Hero = () => {
   return (

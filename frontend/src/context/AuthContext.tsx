@@ -1,6 +1,9 @@
+"use client";
+
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 
+import { backendLogout } from "@/lib/backend";
 import { isSupabaseConfigured, supabase } from "@/lib/supabase";
 
 
@@ -43,8 +46,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return;
     }
 
+    const client = supabase;
+
     const readSession = async () => {
-      const { data } = await supabase.auth.getSession();
+      const { data } = await client.auth.getSession();
       if (data.session) {
         setSession({ access_token: data.session.access_token });
         setUser(
@@ -60,7 +65,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, nextSession) => {
+    } = client.auth.onAuthStateChange((_event, nextSession) => {
       if (!nextSession) {
         setSession(null);
         setUser(null);
@@ -108,10 +113,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return {};
       },
       signOut: async () => {
+        const accessToken = session?.access_token;
+
         if (!supabase) {
+          await backendLogout(accessToken);
           return;
         }
+
         await supabase.auth.signOut();
+        await backendLogout(accessToken);
       },
     }),
     [loading, session, user],
