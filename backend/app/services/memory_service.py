@@ -35,6 +35,12 @@ class MemoryService:
             host=settings.chroma_host,
             port=settings.chroma_port,
             collection_name=settings.chroma_collection,
+            api_key=settings.chroma_api_key,
+            tenant=settings.chroma_tenant,
+            database=settings.chroma_database,
+            cloud_host=settings.chroma_cloud_host,
+            cloud_port=settings.chroma_cloud_port,
+            cloud_ssl=settings.chroma_cloud_ssl,
         )
         self._documents_repo = documents_repo or DocumentsRepository(
             supabase_url=settings.supabase_url,

@@ -13,6 +13,12 @@ class Settings(BaseSettings):
     chroma_host: str = "localhost"
     chroma_port: int = 8000
     chroma_collection: str = "founderos-memory"
+    chroma_api_key: str = ""
+    chroma_tenant: str = ""
+    chroma_database: str = ""
+    chroma_cloud_host: str = "api.trychroma.com"
+    chroma_cloud_port: int = 8000
+    chroma_cloud_ssl: bool = True
     aws_region: str = "us-east-1"
     bedrock_embedding_model: str = "amazon.titan-embed-text-v2:0"
     bedrock_chat_model: str = "moonshotai.kimi-k2.5"
