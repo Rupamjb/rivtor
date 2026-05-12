@@ -15,19 +15,35 @@ class ChromaStore:
         except ModuleNotFoundError as exc:
             raise RuntimeError("chromadb package is not installed") from exc
 
-        if not api_key or not tenant or not database:
-            raise RuntimeError(
-                "Chroma Cloud credentials are required. Set CHROMA_API_KEY, CHROMA_TENANT, and CHROMA_DATABASE."
-            )
+        normalized_api_key = api_key.strip()
+        normalized_tenant = tenant.strip()
+        normalized_database = database.strip()
 
-        self._client = chromadb.CloudClient(
-            tenant=tenant,
-            database=database,
-            api_key=api_key,
-            cloud_host=cloud_host,
-            cloud_port=cloud_port,
-            enable_ssl=cloud_ssl,
-        )
+        if not normalized_api_key:
+            raise RuntimeError("Chroma Cloud API key is required. Set CHROMA_API_KEY.")
+
+        cloud_kwargs = {
+            "api_key": normalized_api_key,
+            "cloud_host": cloud_host,
+            "cloud_port": cloud_port,
+            "enable_ssl": cloud_ssl,
+        }
+
+        if normalized_tenant and normalized_database:
+            try:
+                self._client = chromadb.CloudClient(
+                    tenant=normalized_tenant,
+                    database=normalized_database,
+                    **cloud_kwargs,
+                )
+            except Exception as exc:
+                message = str(exc)
+                if "Could not connect to tenant" in message or "Could not connect to database" in message:
+                    self._client = chromadb.CloudClient(**cloud_kwargs)
+                else:
+                    raise
+        else:
+            self._client = chromadb.CloudClient(**cloud_kwargs)
         self._collection = self._client.get_or_create_collection(name=collection_name)
 
     async def upsert_chunks(
