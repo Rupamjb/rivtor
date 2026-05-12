@@ -32,8 +32,6 @@ class MemoryService:
             bearer_token=settings.aws_bearer_token_bedrock,
         )
         self._chroma_store = chroma_store or ChromaStore(
-            host=settings.chroma_host,
-            port=settings.chroma_port,
             collection_name=settings.chroma_collection,
             api_key=settings.chroma_api_key,
             tenant=settings.chroma_tenant,

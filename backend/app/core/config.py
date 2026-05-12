@@ -10,8 +10,6 @@ class Settings(BaseSettings):
     supabase_anon_key: str = ""
     supabase_service_role_key: str = ""
 
-    chroma_host: str = "localhost"
-    chroma_port: int = 8000
     chroma_collection: str = "founderos-memory"
     chroma_api_key: str = ""
     chroma_tenant: str = ""
