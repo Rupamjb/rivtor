@@ -34,15 +34,24 @@ class MultiRouteRequest(BaseModel):
 
 
 def get_research_agent_service() -> ResearchAgentService:
-    return ResearchAgentService()
+    try:
+        return ResearchAgentService()
+    except Exception as exc:
+        raise HTTPException(status_code=503, detail=str(exc) or "Research service unavailable") from exc
 
 
 def get_content_agent_service() -> ContentAgentService:
-    return ContentAgentService()
+    try:
+        return ContentAgentService()
+    except Exception as exc:
+        raise HTTPException(status_code=503, detail=str(exc) or "Content service unavailable") from exc
 
 
 def get_executive_agent_service() -> ExecutiveAgentService:
-    return ExecutiveAgentService()
+    try:
+        return ExecutiveAgentService()
+    except Exception as exc:
+        raise HTTPException(status_code=503, detail=str(exc) or "Executive service unavailable") from exc
 
 
 def _resolve_user_id(request: Request) -> str:

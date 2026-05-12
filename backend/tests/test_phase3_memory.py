@@ -1,5 +1,7 @@
 from typing import Optional
+from unittest.mock import patch
 
+from fastapi import HTTPException
 from fastapi.testclient import TestClient
 
 from backend.app.api.routes.memory import get_memory_service
@@ -129,3 +131,35 @@ def test_memory_list_returns_503_when_metadata_storage_fails() -> None:
 
     assert response.status_code == 503
     assert response.json()["detail"] == "Supabase metadata storage is not configured"
+
+
+def test_get_memory_service_returns_503_when_initialization_fails() -> None:
+    with patch(
+        "backend.app.api.routes.memory.MemoryService",
+        side_effect=RuntimeError("Chroma Cloud credentials are required"),
+    ):
+        try:
+            get_memory_service()
+        except HTTPException as exc:
+            assert exc.status_code == 503
+            assert exc.detail == "Chroma Cloud credentials are required"
+        else:
+            raise AssertionError("Expected get_memory_service to raise HTTPException")
+
+
+def test_memory_list_initialization_failure_preserves_cors_headers() -> None:
+    client = TestClient(app)
+    with patch(
+        "backend.app.api.routes.memory.MemoryService",
+        side_effect=RuntimeError("Chroma Cloud credentials are required"),
+    ):
+        response = client.get(
+            "/memory/list",
+            headers={
+                **_auth_headers(),
+                "Origin": "https://rivtor-five.vercel.app",
+            },
+        )
+
+    assert response.status_code == 503
+    assert response.headers.get("access-control-allow-origin") in {"*", "https://rivtor-five.vercel.app"}

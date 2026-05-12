@@ -15,7 +15,10 @@ class MemorySearchRequest(BaseModel):
 
 
 def get_memory_service() -> MemoryService:
-    return MemoryService()
+    try:
+        return MemoryService()
+    except Exception as exc:
+        raise HTTPException(status_code=503, detail=str(exc) or "Memory service unavailable") from exc
 
 
 def _resolve_user_id(request: Request) -> str:

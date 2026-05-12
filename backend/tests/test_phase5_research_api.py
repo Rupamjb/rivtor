@@ -1,3 +1,6 @@
+from unittest.mock import patch
+
+from fastapi import HTTPException
 from fastapi.testclient import TestClient
 
 from backend.app.main import app
@@ -105,3 +108,37 @@ def test_research_endpoint_returns_503_when_web_search_unavailable() -> None:
     assert response.json()["detail"] == "Web search unavailable"
 
     app.dependency_overrides.clear()
+
+
+def test_get_research_agent_service_returns_503_when_initialization_fails() -> None:
+    from backend.app.api.routes.agents import get_research_agent_service
+
+    with patch(
+        "backend.app.api.routes.agents.ResearchAgentService",
+        side_effect=RuntimeError("Chroma Cloud credentials are required"),
+    ):
+        try:
+            get_research_agent_service()
+        except HTTPException as exc:
+            assert exc.status_code == 503
+            assert exc.detail == "Chroma Cloud credentials are required"
+        else:
+            raise AssertionError("Expected get_research_agent_service to raise HTTPException")
+
+
+def test_startup_radar_initialization_failure_preserves_cors_headers() -> None:
+    client = TestClient(app)
+    with patch(
+        "backend.app.api.routes.agents.ResearchAgentService",
+        side_effect=RuntimeError("Chroma Cloud credentials are required"),
+    ):
+        response = client.get(
+            "/agents/startup-radar",
+            headers={
+                **_auth_headers(),
+                "Origin": "https://rivtor-five.vercel.app",
+            },
+        )
+
+    assert response.status_code == 503
+    assert response.headers.get("access-control-allow-origin") in {"*", "https://rivtor-five.vercel.app"}
