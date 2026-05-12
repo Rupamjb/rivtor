@@ -15,7 +15,7 @@ class Settings(BaseSettings):
     chroma_tenant: str = ""
     chroma_database: str = ""
     chroma_cloud_host: str = "api.trychroma.com"
-    chroma_cloud_port: int = 8000
+    chroma_cloud_port: int = 443
     chroma_cloud_ssl: bool = True
     aws_region: str = "us-east-1"
     bedrock_embedding_model: str = "amazon.titan-embed-text-v2:0"

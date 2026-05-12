@@ -33,7 +33,7 @@ def test_chroma_store_uses_cloud_client_when_cloud_credentials_present() -> None
         database="test-database",
         api_key="test-api-key",
         cloud_host="api.trychroma.com",
-        cloud_port=8000,
+        cloud_port=443,
         enable_ssl=True,
     )
     http_client.assert_not_called()
@@ -67,13 +67,13 @@ def test_chroma_store_falls_back_to_api_key_resolution_when_tenant_lookup_fails(
         database="rivtor",
         api_key="test-api-key",
         cloud_host="api.trychroma.com",
-        cloud_port=8000,
+        cloud_port=443,
         enable_ssl=True,
     )
     cloud_client.assert_any_call(
         api_key="test-api-key",
         cloud_host="api.trychroma.com",
-        cloud_port=8000,
+        cloud_port=443,
         enable_ssl=True,
     )
     http_client.assert_not_called()

@@ -7,7 +7,7 @@ class ChromaStore:
         tenant: str = "",
         database: str = "",
         cloud_host: str = "api.trychroma.com",
-        cloud_port: int = 8000,
+        cloud_port: int = 443,
         cloud_ssl: bool = True,
     ) -> None:
         try:
